@@ -8,6 +8,12 @@
 			next
 			(fixed-point func next stop-term))))
 
+(define (croot x)
+	(fixed-point (lambda (y) (/ x (square y))) 1.0 (lambda (guess next)
+					 (< (/ (abs (- guess next))
+					 	   guess)
+					 	0.001))))
+
 ;; Without Averge Damping
 (define (fixed-point func guess stop-term)
 	(let ((next (func guess)))
